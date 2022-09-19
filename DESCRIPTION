@@ -1,0 +1,24 @@
+Package: Lab5
+Type: Package
+Title: Package to provide data from the Kolada API
+Version: 1.0
+Date: 2022-09-19
+Author: Nikolaus Stratil-Sauer <niko.stratil@gmail.com> , Juan Manuel Pardo <juapa351@student.liu.se>
+Maintainer: Nikolaus Stratil-Sauer <niko.stratil@gmail.com>
+License: GPL (>=2)
+Description: Package for Lab5.
+RoxygenNote: 7.2.1
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Depends: 
+    R (>= 2.10),
+    httr,
+    jsonlite,
+    ggplot2,
+    scales
+LazyData: true
+Encoding: UTF-8
+VignetteBuilder: knitr
