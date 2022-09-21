@@ -13,9 +13,9 @@
 #' @param return_data Per default this is FALSE, if it is TRUE no plot is 
 #'  output, instead a data.frame is returned
 #'  
-#' @export 
+#' @export
 #' @import httr
-#' @import jsonlite
+#' @importFrom  jsonlite fromJSON
 #' @import ggplot2
 #' @import scales
 #' 
@@ -23,6 +23,8 @@
 #' compare_inhabitants("Linköping","Norrköping")
 #' compare_inhabitants("Linköping","Norrköping", return_data = TRUE)
 #' 
+#' 
+
 compare_inhabitants = function(municipality1, municipality2, return_data = FALSE){
   #TODO error handling (wrong inputs) and maybe more functionality (other KPIs)
   # Helpful resources: 

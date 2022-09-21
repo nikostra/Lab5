@@ -27,4 +27,5 @@ returns either a plot of the progression of their inhabitant numbers or
 compare_inhabitants("Linköping","Norrköping")
 compare_inhabitants("Linköping","Norrköping", return_data = TRUE)
 
+
 }
