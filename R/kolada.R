@@ -40,6 +40,9 @@ compare_inhabitants = function(municipality1, municipality2, return_data = FALSE
     response = GET(request_url)
     response_content = content(response,"text")
     response_json = fromJSON(response_content,flatten = TRUE)
+    if (length(response_json$values) == 0){
+      stop(paste("Wrong input: \"", municipality_name, "\" municipality is not in the database.", sep=""))
+    }
     response_df = as.data.frame(response_json)
     id = ""
     #Explanation: Sometimes you get 2 codes as a response, one with code "K" 
