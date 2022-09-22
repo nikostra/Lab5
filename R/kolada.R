@@ -34,6 +34,9 @@ compare_inhabitants = function(municipality1, municipality2, return_data = FALSE
   
   # Function to make API calls to receive the code for the municipality that we 
   # need to make the API call for the inhabitants
+  if (municipality1 == municipality2){
+    stop("Please select two different municipalities.", call. = FALSE)
+  }
   get_municipality_code = function(municipality_name){
     url = "http://api.kolada.se/v2/"
     request_url = paste(url,"municipality?title=",municipality_name,sep = "") # build request URL
