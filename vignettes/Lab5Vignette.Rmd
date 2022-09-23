@@ -1,0 +1,33 @@
+---
+title: "Lab5Vignette"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Lab5Vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(Lab5)
+```
+
+# Overview
+This vignette illustrates how the package [Lab5](https://github.com/nikostra/Lab5.git) works and it explains its different functionalities when connecting to the web Kolada API. The Kolada database contains key indicators regarding the Swedish municipalities, and the goal of the package is to make a comparison between the data of two different municipalities.
+
+# How to use the package
+The workflow of the package is simple. The user should give as input the names of two different municipalities. If the inputs are correct and they are present in the web database, the function will collect the necessary data and, by default, build a plot comparing the number of inhabitants from 1970 to the most recently stored data.
+```{r}
+compare_inhabitants("Linköping","Norrköping")
+```
+
+An optional command lets the user determine if the data should be returned directly (return_data = TRUE), or in a graph (by default, return_data = FALSE).
+```{r}
+compare_inhabitants("Linköping","Norrköping", return_data = TRUE)
+```
