@@ -1,6 +1,3 @@
-library(shiny)
-library(Lab5)
-
 server <- function(input, output) {
   
   buildPlot <- eventReactive(input$go, {

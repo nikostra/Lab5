@@ -1,5 +1,3 @@
-library(shiny)
-
 ui <- fluidPage(
   
   # App title ----
