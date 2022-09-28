@@ -1,4 +1,4 @@
-context("compare_inhabitants")
+
 
 df_LN <-data.frame("year" = 1970:2021, "municipality_code.1" = "0580", 
                    "Inhabitants.Linköping" = c(104646, 105807, 106643, 107033, 108034,
@@ -25,16 +25,42 @@ df_LN <-data.frame("year" = 1970:2021, "municipality_code.1" = "0580",
                                                 137035, 139363, 140927, 141676, 143171,
                                                 143478, 144458))
 
-test_that("Error messages are returned for erronous input in the get_municipality_code function", {
+test_that("Error is returned for erronous input in the get_municipality_code function", {
   municipality1 <- "Nowhere"
   expect_error(get_municipality_code(municipality1))
 })
-test_that("Error messages are returned when the two inputs are the same", {
+test_that("Error message returned for erronous input clarifies the cause of error", {
+expect_that(compare_inhabitants("Nowhere", "Linköping"),
+            throws_error("municipality is not in the database."))
+})
+test_that("Error is returned when the two inputs are identical", {
   municipality1 <- "Linköping"
   expect_error(compare_inhabitants(municipality1, municipality1))
 })
 
-test_that("Function gives the correct outputs", {
-expect_equal(compare_inhabitants("Linköping", "Norrköping", return_data = TRUE), df_LN)
+test_that("Error message returned for identical inputs suggests a solution", {
+  expect_that(compare_inhabitants("Linköping", "Linköping"),
+              throws_error("Please select two different municipalities."))
+})
+test_that("Non character inputs return an error", {
+  municipality1 <- 1
+  municipality2 <- "Linköping"
+  expect_error(get_municipality_code(municipality1,municipality2))
+})
+test_that("Error message returned for non character inputs clarify the error cause", {
+  expect_that(compare_inhabitants("Linköping", 1),
+              throws_error("The inputs should be strings."))
 })
 
+test_that("Function gives the correct outputs", {
+  expect_equal(compare_inhabitants("Linköping", "Norrköping", return_data = TRUE), df_LN)
+})
+
+test_that("The function fails when arguments are missing", {
+  expect_error(compare_inhabitants(municipality2))
+})
+
+# test_that("The function gathers the correct municipality codes", {
+#   municipality <- "Linköping"
+#   expect_equal(get_municipality_code(municipality), "0580")
+# })

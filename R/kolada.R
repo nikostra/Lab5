@@ -6,9 +6,9 @@
 #'  (if the return_data argument is TRUE) returns a data.frame with the inhabitant
 #'  data of those municipalities. Data usually exists for the period 1970-2021.
 #'  
-#' @param municipality1 The first municipality to be comapred. 
+#' @param municipality1 The first municipality to be compared. 
 #' ATTENTION: Exact spelling including special letters is needed (e.g. ö)
-#' @param municipality2 The second municipality to be comapred
+#' @param municipality2 The second municipality to be compared
 #' ATTENTION: Exact spelling including special letters is needed (e.g. ö)
 #' @param return_data Per default this is FALSE, if it is TRUE no plot is 
 #'  output, instead a data.frame is returned
@@ -34,6 +34,10 @@ compare_inhabitants = function(municipality1, municipality2, return_data = FALSE
   
   # Function to make API calls to receive the code for the municipality that we 
   # need to make the API call for the inhabitants
+  if (!is.character(municipality1) || !is.character(municipality2)){
+    stop("The inputs should be strings.", call. = FALSE)
+  }
+  
   if (municipality1 == municipality2){
     stop("Please select two different municipalities.", call. = FALSE)
   }
