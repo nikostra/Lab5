@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Lab5Vignette</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Lab5Vignette</h1>
+
+
+
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Lab5)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Loading required package: httr</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Loading required package: jsonlite</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Loading required package: ggplot2</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Loading required package: scales</span></span></code></pre></div>
+<div id="overview" class="section level1">
+<h1>Overview</h1>
+<p>This vignette illustrates how the package <a href="https://github.com/nikostra/Lab5.git">Lab5</a> works and it
+explains its different functionalities when connecting to the web Kolada
+API. The Kolada database contains key indicators regarding the Swedish
+municipalities, and the goal of the package is to make a comparison
+between the data of two different municipalities.</p>
+</div>
+<div id="how-to-use-the-package" class="section level1">
+<h1>How to use the package</h1>
+<p>The workflow of the package is simple. The user should give as input
+the names of two different municipalities. If the inputs are correct and
+they are present in the web database, the function will collect the
+necessary data and, by default, build a plot comparing the number of
+inhabitants from 1970 to the most recently stored data.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">compare_inhabitants</span>(<span class="st">&quot;Linköping&quot;</span>,<span class="st">&quot;Norrköping&quot;</span>)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<p>An optional command lets the user determine if the data should be
+returned directly (return_data = TRUE), or in a graph (by default,
+return_data = FALSE).</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">compare_inhabitants</span>(<span class="st">&quot;Linköping&quot;</span>,<span class="st">&quot;Norrköping&quot;</span>, <span class="at">return_data =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    year municipality_code.1 Inhabitants.Linköping municipality_code.2</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1  1970                0580                104646                0581</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2  1971                0580                105807                0581</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3  1972                0580                106643                0581</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4  1973                0580                107033                0581</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5  1974                0580                108034                0581</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6  1975                0580                109236                0581</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7  1976                0580                110053                0581</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8  1977                0580                110779                0581</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9  1978                0580                111424                0581</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 1979                0580                111866                0581</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11 1980                0580                112600                0581</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12 1981                0580                113330                0581</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 13 1982                0580                113993                0581</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 14 1983                0580                114681                0581</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 15 1984                0580                115600                0581</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 16 1985                0580                116838                0581</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 17 1986                0580                117835                0581</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 18 1987                0580                118602                0581</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 19 1988                0580                119167                0581</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 20 1989                0580                120562                0581</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 21 1990                0580                122268                0581</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 22 1991                0580                124352                0581</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 23 1992                0580                126377                0581</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 24 1993                0580                128610                0581</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 25 1994                0580                130489                0581</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 26 1995                0580                131370                0581</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 27 1996                0580                131898                0581</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 28 1997                0580                132089                0581</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 29 1998                0580                131948                0581</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 30 1999                0580                132500                0581</span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 31 2000                0580                133168                0581</span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 32 2001                0580                134039                0581</span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 33 2002                0580                135066                0581</span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 34 2003                0580                136231                0581</span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 35 2004                0580                136912                0581</span></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 36 2005                0580                137636                0581</span></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 37 2006                0580                138580                0581</span></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 38 2007                0580                140367                0581</span></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 39 2008                0580                141863                0581</span></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 40 2009                0580                144690                0581</span></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 41 2010                0580                146416                0581</span></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 42 2011                0580                147334                0581</span></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 43 2012                0580                148521                0581</span></span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 44 2013                0580                150202                0581</span></span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 45 2014                0580                151881                0581</span></span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 46 2015                0580                152966                0581</span></span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 47 2016                0580                155817                0581</span></span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 48 2017                0580                158520                0581</span></span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 49 2018                0580                161034                0581</span></span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 50 2019                0580                163051                0581</span></span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 51 2020                0580                164616                0581</span></span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 52 2021                0580                165527                0581</span></span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    Inhabitants.Norrköping</span></span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1                  120959</span></span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2                  121262</span></span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3                  120778</span></span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4                  120341</span></span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5                  119470</span></span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6                  119169</span></span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7                  119967</span></span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8                  120647</span></span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9                  120251</span></span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10                 119993</span></span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11                 119238</span></span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12                 118626</span></span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 13                 118236</span></span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 14                 118064</span></span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 15                 118451</span></span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 16                 118567</span></span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 17                 118801</span></span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 18                 119001</span></span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 19                 119370</span></span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 20                 119921</span></span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 21                 120522</span></span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 22                 120756</span></span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 23                 120798</span></span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 24                 121028</span></span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 25                 123240</span></span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 26                 123795</span></span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 27                 123531</span></span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 28                 123049</span></span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 29                 122415</span></span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 30                 122212</span></span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 31                 122199</span></span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 32                 122896</span></span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 33                 123303</span></span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 34                 123971</span></span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 35                 124410</span></span>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 36                 124642</span></span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 37                 125463</span></span>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 38                 126680</span></span>
+<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 39                 128060</span></span>
+<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 40                 129254</span></span>
+<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 41                 130050</span></span>
+<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 42                 130623</span></span>
+<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 43                 132124</span></span>
+<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 44                 133749</span></span>
+<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 45                 135283</span></span>
+<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 46                 137035</span></span>
+<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 47                 139363</span></span>
+<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 48                 140927</span></span>
+<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 49                 141676</span></span>
+<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 50                 143171</span></span>
+<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 51                 143478</span></span>
+<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 52                 144458</span></span></code></pre></div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

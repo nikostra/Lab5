@@ -35,4 +35,6 @@ test_that("Error messages are returned when the two inputs are the same", {
 })
 
 test_that("Function gives the correct outputs", {
-expect_equal(compare_inhabitants("Linköping", "Norrköping", return_data = TRUE), df_LN)})
+expect_equal(compare_inhabitants("Linköping", "Norrköping", return_data = TRUE), df_LN)
+})
+
