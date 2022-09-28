@@ -23,7 +23,7 @@ This vignette illustrates how the package [Lab5](https://github.com/nikostra/Lab
 
 # How to use the package
 The workflow of the package is simple. The user should give as input the names of two different municipalities. If the inputs are correct and they are present in the web database, the function will collect the necessary data and, by default, build a plot comparing the number of inhabitants from 1970 to the most recently stored data.
-```{r}
+```{r fig3, fig.width = 5, fig.asp = .62}
 compare_inhabitants("Linköping","Norrköping")
 ```
 
