@@ -68,8 +68,3 @@ test_that("Function gives the correct outputs", {
 test_that("The function fails when arguments are missing", {
   expect_error(compare_inhabitants(municipality2))
 })
-
-# test_that("The function gathers the correct municipality codes", {
-#   municipality <- "Linköping"
-#   expect_equal(get_municipality_code(municipality), "0580")
-# })
