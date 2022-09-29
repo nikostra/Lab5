@@ -34,6 +34,9 @@ compare_inhabitants = function(municipality1, municipality2, return_data = FALSE
   
   # Function to make API calls to receive the code for the municipality that we 
   # need to make the API call for the inhabitants
+  if (!is.logical(return_data)){
+    stop("The return_data argument should be logical (TRUE or FALSE).", call. = FALSE)
+  }
   if (!is.character(municipality1) || !is.character(municipality2)){
     stop("The inputs should be strings.", call. = FALSE)
   }

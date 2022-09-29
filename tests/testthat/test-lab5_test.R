@@ -24,7 +24,16 @@ df_LN <-data.frame("year" = 1970:2021, "municipality_code.1" = "0580",
                                                 130050, 130623, 132124, 133749, 135283,
                                                 137035, 139363, 140927, 141676, 143171,
                                                 143478, 144458))
-
+test_that("Error is returned when no inputs are given to the function", {
+  expect_error(compare_inhabitants())
+})
+test_that("Error is returned when the third argument is not a boolean", {
+  expect_error(compare_inhabitants("Linköping", "Norrköping", return_data = 5))
+})
+test_that("Error message for non boolean third argument specifies the cause", {
+  expect_that(compare_inhabitants("Linköping", "Norrköping", return_data = 5),
+              throws_error("The return_data argument should be logical"))
+})
 test_that("Error is returned for erronous input in the get_municipality_code function", {
   municipality1 <- "Nowhere"
   expect_error(get_municipality_code(municipality1))
