@@ -12,6 +12,9 @@
 #' ATTENTION: Exact spelling including special letters is needed (e.g. ö)
 #' @param return_data Per default this is FALSE, if it is TRUE no plot is 
 #'  output, instead a data.frame is returned
+#'  @return The comparison between \code{municipality1} and \code{municipality2}. If
+#'  \code{return_data} is true it will be returned as a table with data, otherwise
+#'  it will return a graph with the inhabitation evolution of the two municipalities
 #'  
 #' @export
 #' @import httr

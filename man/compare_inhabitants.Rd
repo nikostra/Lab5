@@ -8,14 +8,17 @@ swedish municipalities}
 compare_inhabitants(municipality1, municipality2, return_data = FALSE)
 }
 \arguments{
-\item{municipality1}{The first municipality to be comapred. 
+\item{municipality1}{The first municipality to be compared. 
 ATTENTION: Exact spelling including special letters is needed (e.g. ö)}
 
-\item{municipality2}{The second municipality to be comapred
+\item{municipality2}{The second municipality to be compared
 ATTENTION: Exact spelling including special letters is needed (e.g. ö)}
 
 \item{return_data}{Per default this is FALSE, if it is TRUE no plot is 
-output, instead a data.frame is returned}
+output, instead a data.frame is returned
+@return The comparison between \code{municipality1} and \code{municipality2}. If
+\code{return_data} is true it will be returned as a table with data, otherwise
+it will return a graph with the inhabitation evolution of the two municipalities}
 }
 \description{
 This function takes two names of swedish municipalities as arguments and
